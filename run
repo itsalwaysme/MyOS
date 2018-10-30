@@ -1,0 +1,7 @@
+qemu-system-x86_64 \
+    -monitor stdio \
+    -drive if=pflash,format=raw,readonly,file=ovmf/OVMF_CODE-pure-efi.fd \
+    -drive if=pflash,format=raw,file=ovmf/myos-OVMF_VARS-pure-efi.fd \
+    -drive file=os.img,media=disk,format=raw \
+    -accel kvm -cpu host,ibpb,pdpe1gb,virt-ssbd \
+    -net none
