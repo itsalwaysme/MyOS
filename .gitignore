@@ -1,0 +1,5 @@
+*.o
+*.elf
+os.img
+BOOTX64.EFI
+.vscode
