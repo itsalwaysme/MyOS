@@ -1,0 +1,17 @@
+--- /dev/null	2018-09-30 18:12:52.383395100 -0500
++++ gcc-8.2.0/gcc/config/i386/t-x86_64-elf	2018-09-30 18:12:52.383395100 -0500
+@@ -0,0 +1,4 @@
++# Add libgcc multilib variant without red-zone requirement
++ 
++MULTILIB_OPTIONS += mno-red-zone mcmodel=kernel
++MULTILIB_DIRNAMES += no-red-zone mcmodel-kernel
+--- gcc-8.2.0/gcc/config.gcc  2018-09-30 18:22:52.939993400 -0500
++++ gcc-8.2.0/gcc/config.gcc.new  2018-09-30 18:23:52.939993400 -0500
+@@ -1494,6 +1494,7 @@
+	tm_file="${tm_file} i386/unix.h i386/att.h dbxelf.h elfos.h newlib-stdint.h i386/i386elf.h"
+	;;
+ x86_64-*-elf*)
++	tmake_file="${tmake_file} i386/t-x86_64-elf" # include the new multilib configuration
+	tm_file="${tm_file} i386/unix.h i386/att.h dbxelf.h elfos.h newlib-stdint.h i386/i386elf.h i386/x86-64.h"
+	;;
+ x86_64-*-rtems*)
