@@ -1,13 +1,16 @@
-# TODO check if O2 actually emits any SSE2 or anything.
-# TODO do a dist build?
-CCFLAGS = -s -flto -ffreestanding -mcmodel=kernel -mno-red-zone -O2 -Wall -Wextra -pipe
+CCFLAGS = -ffreestanding -mcmodel=kernel -mno-red-zone -Wall -Wextra -pipe
 LDFLAGS = -nostdlib -lgcc -z max-page-size=0x1000
+
+all: release
+
+release: CCFLAGS += -O2 -flto -s
+debug:   CCFLAGS += -g
+release: kernel.elf
+debug:   kernel.elf
 
 OBJECTS = $(patsubst %.S, %.o, $(patsubst %.c, %.o, $(shell find $(SRC) -name '*.S' -o -name '*.c')))
 
-all: kernel.elf
-
-kernel.elf: $(OBJECTS) linker.ld
+kernel.elf: $(OBJECTS) arch/x86_64/linker.ld
 	x86_64-myos-elf-gcc -T $(filter %.ld,$^) $(OBJECTS) -o kernel.elf $(CCFLAGS) $(LDFLAGS)
 
 %.o: %.c
@@ -16,6 +19,7 @@ kernel.elf: $(OBJECTS) linker.ld
 %.o: %.S
 	x86_64-myos-elf-gcc -I . -c $^ -o $@ $(CCFLAGS)
 
+.PHONY: clean
 clean:
 	find -type f -name '*.o' -delete
 	find -type f -name '*.elf' -delete
