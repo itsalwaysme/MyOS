@@ -3,3 +3,6 @@
 os.img
 BOOTX64.EFI
 .vscode
+qemu
+cross_compiler
+ovmf

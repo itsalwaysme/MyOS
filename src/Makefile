@@ -11,13 +11,13 @@ debug:   kernel.elf
 OBJECTS = $(patsubst %.S, %.o, $(patsubst %.c, %.o, $(shell find $(SRC) -name '*.S' -o -name '*.c')))
 
 kernel.elf: $(OBJECTS) arch/x86_64/linker.ld
-	x86_64-myos-elf-gcc -T $(filter %.ld,$^) $(OBJECTS) -o kernel.elf $(CCFLAGS) $(LDFLAGS)
+	x86_64-elf-gcc -T $(filter %.ld,$^) $(OBJECTS) -o kernel.elf $(CCFLAGS) $(LDFLAGS)
 
 %.o: %.c
-	x86_64-myos-elf-gcc -I . -c $^ -o $@ $(CCFLAGS)
+	x86_64-elf-gcc -I . -c $^ -o $@ $(CCFLAGS)
 
 %.o: %.S
-	x86_64-myos-elf-gcc -I . -c $^ -o $@ $(CCFLAGS)
+	x86_64-elf-gcc -I . -c $^ -o $@ $(CCFLAGS)
 
 .PHONY: clean
 clean:
