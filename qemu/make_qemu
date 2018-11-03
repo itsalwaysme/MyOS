@@ -1,7 +1,0 @@
-cd qemu
-export PREFIX="$HOME/opt/qemu"
-mkdir -p build_qemu
-cd build_qemu
-../qemu-3.0.0/configure --target-list=x86_64-softmmu --prefix=$PREFIX
-make
-make install
