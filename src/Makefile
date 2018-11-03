@@ -3,7 +3,7 @@ LDFLAGS = -nostdlib -lgcc -z max-page-size=0x1000
 
 all: release
 
-release: CCFLAGS += -O2 -flto -s
+release: CCFLAGS += -O2 -flto -s -fno-asynchronous-unwind-tables
 debug:   CCFLAGS += -g
 release: kernel.elf
 debug:   kernel.elf
