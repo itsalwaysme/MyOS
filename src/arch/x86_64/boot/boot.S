@@ -1,4 +1,4 @@
-#include "arch/x86_64/boot/include/boot.h"
+#include "include/boot.h"
 #include "include/multiboot2.h"
 #include "arch/x86_64/mmu/include/mmu.h"
 #include "arch/x86_64/cpu/include/gdt.h"
@@ -97,6 +97,7 @@ _start32:
 
     // Save the multiboot info ptr
     movl %ebx, multiboot_ptr
+
 
 /*
  * Setup paging
